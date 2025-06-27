@@ -3,6 +3,10 @@ name: Label Deploy Requests
 on:
   issues:
     types: [opened, edited]
+    
+permissions:
+  issues: write
+
 
 jobs:
   label:
