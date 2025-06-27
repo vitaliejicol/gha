@@ -1,6 +1,6 @@
 name: "Deploy Request"
 description: "Trigger deployment to UAT or PROD"
-title: "Deploy to {{ environment }}"
+title: "Select the environment"
 body:
   - type: dropdown
     id: environment
