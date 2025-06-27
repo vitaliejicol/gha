@@ -1,0 +1,28 @@
+name: Label Deploy Requests
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add label based on environment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body.toLowerCase();
+            const labels = [];
+
+            if (body.includes("uat")) labels.push("uat");
+            if (body.includes("prod")) labels.push("prod");
+
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: labels,
+              });
+            }
